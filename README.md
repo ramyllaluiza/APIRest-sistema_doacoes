@@ -57,6 +57,9 @@ A API estará disponível em:
 
 http://localhost:8080
 
+A documentação de demostração foi gerada no Swagger, no link: http://localhost:8080/api-docs
+ou no terminal
+
 ### 7. Parar os Contêineres
 Quando terminar, você pode parar os contêineres com o comando:
 
