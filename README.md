@@ -26,13 +26,11 @@ API REST para gerenciamento de doações de alimentos e outros itens. O projeto 
 ## 📝 Como Rodar o Projeto
 
 ### 1. Clone o repositório
-Clone este repositório para sua máquina local utilizando o comando:
 
 ```bash
 git clone https://github.com/ramyllaluiza/APIRest-sistema_doacoes.git
 ```
 ### 2. Navegue até o diretório do projeto
-Clone este repositório para sua máquina local utilizando o comando:
 
 ```bash
 cd APIRest-sistema_doacoes
@@ -41,14 +39,12 @@ cd APIRest-sistema_doacoes
 Antes de rodar o projeto, verifique se o Docker e o Docker Compose estão instalados.
 
 ### 4. Instale as dependências
-Clone este repositório para sua máquina local utilizando o comando:
 
 ```bash
 npm install
 ```
 
 ### 5. Build e Início com Docker
-Clone este repositório para sua máquina local utilizando o comando:
 
 ```bash
 docker-compose up --build
@@ -66,4 +62,52 @@ Quando terminar, você pode parar os contêineres com o comando:
 
 ```bash
 docker-compose down
+```
+🔐 Autenticação JWT
+A API utiliza JSON Web Tokens (JWT) para autenticação de usuários. Após o login, o usuário receberá um token JWT, que deve ser incluído no cabeçalho de autorização de todas as requisições subsequentes a endpoints protegidos.
+
+1. Endpoint da API
+Este endpoint autentica um usuário (doador, instituição ou administrador) e retorna um token JWT.
+
+Endpoint: POST /auth/login
+- Descrição: Realiza o login de um usuário e retorna um token JWT.
+```bash
+### Corpo da requisição: 
+{
+  "email": "joao@example.com",
+  "senha": "123456"
+}
+### Exemplo de requisição:
+POST http://localhost:8080/auth/login
+Content-type: application/json
+### Resposta caso bem sucedido:
+{
+  "msg": "Autenticação realizada com sucesso!",
+  "token": "TOKEN_GERADO"
+}
+### Caso contrário:
+{
+  "msg": "Usuário não encontrado!"
+}
+```
+
+Endpoint: GET /auth/perfil
+- Descrição: Retorna as informações do perfil do usuário autenticado.
+```bash
+### Corpo da requisição: 
+GET http://localhost:8080/auth/perfil
+Authorization: Bearer "TOKEN_GERADO"
+### Resposta cado bem sucedido:
+  "usuario":
+{
+    "id": 1,
+    "nome": "João Silva",
+    "email": "joao@example.com",
+    "iat": 1733667255,
+    "exp": 1733670855
+  }
+### Caso contrário:
+{
+  "msg": "Token inválido!"
+}
 ```
