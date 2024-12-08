@@ -63,7 +63,7 @@ Quando terminar, você pode parar os contêineres com o comando:
 ```bash
 docker-compose down
 ```
-🔐 Autenticação JWT
+### 🔐 Autenticação JWT
 A API utiliza JSON Web Tokens (JWT) para autenticação de usuários. Após o login, o usuário receberá um token JWT, que deve ser incluído no cabeçalho de autorização de todas as requisições subsequentes a endpoints protegidos.
 
 1. Endpoint da API
