@@ -1,0 +1,14 @@
+
+POST http://localhost:8080/auth/login
+Content-type: application/json
+
+{
+  "email": "joao@example.com",
+  "senha": "123456"
+}
+
+
+###
+GET http://localhost:8080/auth/perfil
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibm9tZSI6Ikpvw6NvIFNpbHZhIiwiZW1haWwiOiJqb2FvQGV4YW1wbGUuY29tIiwiaWF0IjoxNzMzNjYxNDM2LCJleHAiOjE3MzM2NjUwMzZ9.Dd99JU6tCoUH7iGTc9imCbVXQSpaMOPZE4dzgjF2aBE
+Content-Type: application/json

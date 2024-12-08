@@ -1,0 +1,36 @@
+GET http://localhost:8080/
+
+###
+
+GET http://localhost:8080/doacoes
+
+### 
+
+POST http://localhost:8080/doacoes
+Content-type: application/json
+
+{
+    "nome": "Calça", 
+    "gênero": "feminino",
+    "quantidade": "1"
+}
+
+### 
+
+PUT http://localhost:8080/doacoes?id=048801ea-c16a-49d4-81e6-c7945639d1c3
+Content-type: application/json
+
+{
+    "nome": "Calça preta", 
+    "gênero": "feminino",
+    "quantidade": "1"
+}
+
+### 
+
+DELETE http://localhost:8080/doacoes?id=048801ea-c16a-49d4-81e6-c7945639d1c3
+Content-type: application/json
+
+{
+    "peça": "Calça preta"
+}
