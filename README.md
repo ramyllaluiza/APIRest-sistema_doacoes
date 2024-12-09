@@ -1,6 +1,16 @@
+# Tarefa realizada na disciplina de Engenharia de Software, ministrada pelo Prof. Dr. Eduardo de Lucena Falcão
+# Discentes: 
+- [Ramylla Barbalho](https://github.com/ramyllaluiza)
+- [João Rafael](https://github.com/rafaelsnr)
+- Lucas Garcia 
+
 # 🚀 API Rest Sistema de Doações com Docker
 
-API REST para gerenciamento de doações de alimentos e outros itens. O projeto utiliza **Node.js** com **Express** para a API e **JWT** para autenticação. O banco de dados é em memória.
+API REST para gerenciamento de doações de roupas para ONG's/instituições. O projeto utiliza **Node.js** com **Express** para a API e **JWT** para autenticação. O banco de dados é em memória.
+---
+
+- [Histórias de usuário](https://drive.google.com/file/d/1rHVscVvxEsKXZXbKbabnVxpkkQjsOZ_q/view)
+- [Diagramas UML](https://drive.google.com/file/d/1FxuZc4dPCSOArS82hCk_7FVHyvP1vS1b/view)
 
 ---
 
@@ -69,48 +79,152 @@ docker-compose down
 ### 🔐 Autenticação JWT
 A API utiliza JSON Web Tokens (JWT) para autenticação de usuários. Após o login, o usuário receberá um token JWT, que deve ser incluído no cabeçalho de autorização de todas as requisições subsequentes a endpoints protegidos.
 
-1. Endpoint da API
+## 1. Endpoint da API (auth)
+
 Este endpoint autentica um usuário (doador, instituição ou administrador) e retorna um token JWT.
+Para testar o endpoint, utilizaremos o comando cURL para realizar as requisições.
+
+## Passo a Passo:
+- Abra um novo terminal.
+- Execute o seguinte comando:
 
 Endpoint: POST /auth/login
 - Descrição: Realiza o login de um usuário e retorna um token JWT.
+
 ```bash
-### Corpo da requisição: 
-{
-  "email": "joao@example.com",
-  "senha": "123456"
-}
-### Exemplo de requisição:
-POST http://localhost:8080/auth/login
-Content-type: application/json
-### Resposta caso bem sucedido:
+curl -X POST http://localhost:8080/auth/login \
+     -H "Content-Type: application/json" \
+     -d '{"email": "joao@example.com", "senha": "123456"}'
+```
+- Resposta caso bem sucedido:
+```bash
 {
   "msg": "Autenticação realizada com sucesso!",
-  "token": "TOKEN_GERADO"
-}
-### Caso contrário:
+  "token": "<Token_Gerado>"
+{
+```
+- Caso não:
+```bash
 {
   "msg": "Usuário não encontrado!"
 }
+{
+  "msg": "Senha incorreta!"
+}
 ```
-
 Endpoint: GET /auth/perfil
 - Descrição: Retorna as informações do perfil do usuário autenticado.
 ```bash
-### Corpo da requisição: 
-GET http://localhost:8080/auth/perfil
-Authorization: Bearer "TOKEN_GERADO"
-### Resposta cado bem sucedido:
-  "usuario":
+curl -X GET http://localhost:8080/auth/perfil \
+     -H "Authorization: Bearer <COPIE_O_TOKEN_AQUI>" \
+     -H "Content-Type: application/json"
+```
+- Resposta caso bem sucedido:
+```bash
 {
+  "usuario": {
     "id": 1,
     "nome": "João Silva",
     "email": "joao@example.com",
-    "iat": 1733667255,
-    "exp": 1733670855
+    "iat": 1733781038,
+    "exp": 1733784638
   }
-### Caso contrário:
+}
+```
+- Caso contrário:
+```bash
 {
   "msg": "Token inválido!"
 }
 ```
+## 2. Endpoint da API (doações)
+
+Esta API permite gerenciar doações realizadas no sistema, incluindo a listagem, criação, atualização e remoção de doações. 
+
+# GET
+```bash
+curl -X GET http://localhost:8080/doacoes
+```
+- Resposta: 
+  "doacoes": []
+
+# POST:
+```bash
+curl -X POST http://localhost:8080/doacoes \
+     -H "Content-Type: application/json" \
+     -d '{
+           "nome": "Calça",
+           "gênero": "feminino",
+           "quantidade": "1"
+         }'
+```
+- Resposta(200): {"msg": "Doação adicionada com sucesso!"}
+- Resposta(400): {"msg": "Doação não encontra"}
+### Faça o GET novamente para obter o ID
+
+## PUT:
+  ```bash
+curl -X PUT "http://localhost:8080/doacoes?id=<ID>" \
+     -H "Content-Type: application/json" \
+     -d '{
+           "nome": "Calça preta",
+           "gênero": "feminino",
+           "quantidade": "1"}'
+  ```
+- Resposta(200): {"msg": "Doação atualizada com sucesso!"}
+- Resposta(400): {"msg": "Doação não encontrada!"}
+## DELETE:
+  ```bash
+curl -X DELETE "http://localhost:8080/doacoes?id=<ID>"
+  ```
+- Resposta(200): {"msg": "Doação deletada com sucesso!"}
+- Resposta(400): {"msg": "Doação não encontrada!"}
+
+## 3. Endpoint da API (login)
+
+A API de Login permite gerenciar autenticações e contas de usuários no sistema. Com ela, é possível consultar, criar, atualizar e excluir logins.  
+
+# GET
+```bash
+curl -X GET http://localhost:8080/login
+```
+- Resposta(200): {"logins": []}
+
+# POST:
+```bash
+curl -X POST http://localhost:8080/login \
+     -H "Content-Type: application/json" \
+     -d '{
+           "email": "luizalber@gmail.com",
+           "senha": "senhaliuzadx"
+         }'
+```
+- Resposta(200): {
+  "msg": "Login registrado com sucesso!",
+  "login": {
+    "id": "ae0d2570-692f-4bdc-b78d-9e47a6ce342c",
+    "email": "luizalber@gmail.com",
+    "senha": "$2b$10$MthKY6wBo.uDwWWYOcvNuu27oRbV67uyW/j5yB6Nhp6trPDi..pnC"
+  }
+}
+- Resposta(400): { msg: "Login não encontrado!" }
+  
+### Faça o GET novamente para obter o ID
+
+## PUT:
+  ```bash
+curl -X PUT "http://localhost:8080/login?id=<ID>" \
+     -H "Content-Type: application/json" \
+     -d '{
+           "email": "pedroluiza@gmail.com",
+           "senha": "123456"
+         }'
+  ```
+- Resposta(200): {"msg": "Usuário atualizado com sucesso!"}
+- Resposta(400): {"msg": "Usuário não encontrado!"}
+## DELETE:
+  ```bash
+curl -X DELETE "http://localhost:8080/login?id=<ID>"
+  ```
+- Resposta(200): {"msg": "Login deletado com sucesso!"}
+- Resposta(400): {"msg": "Login não encontrado!"}
