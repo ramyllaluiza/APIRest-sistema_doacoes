@@ -1,34 +1,28 @@
-GET http://localhost:8080/
-
+curl -X GET http://localhost:8080/
 ###
 
-GET http://localhost:8080/login
-### 
-
-POST http://localhost:8080/login
-Content-type: application/json
-
-{
-    "email": "luizalber@gmail.com",
-    "senha": "senhaliuzadx" 
-}
+curl -X GET http://localhost:8080/login
 
 ### 
 
-PUT http://localhost:8080/login?id=56c8c961-0e35-42b8-a8e5-32b2d1016fc8
-Content-type: application/json
+curl -X POST http://localhost:8080/login \
+     -H "Content-Type: application/json" \
+     -d '{
+           "email": "luizalber@gmail.com",
+           "senha": "senhaliuzadx"
+         }'
 
-{
-    "email": "pedroluiza@gmail.com",
-    "senha": "123456"
-}
+### 
+
+curl -X PUT "http://localhost:8080/login?id=fd5d42ad-3df6-4baa-9ae0-745d6b33e381" \
+     -H "Content-Type: application/json" \
+     -d '{
+           "email": "pedroluiza@gmail.com",
+           "senha": "123456"
+         }'
+
 
 ###
 
-POST http://localhost:8080/api/login/usuario
-Content-Type: application/json
-
-{
-    "email": "turing@gmail.com",
-    "senha": "senha"
-}
+curl -X DELETE "http://localhost:8080/login?id=fd5d42ad-3df6-4baa-9ae0-745d6b33e381" \
+     -H "Content-Type: application/json"
