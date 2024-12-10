@@ -1,36 +1,30 @@
-GET http://localhost:8080/
+curl -X GET http://localhost:8080/
 
 ###
 
-GET http://localhost:8080/doacoes
+curl -X GET http://localhost:8080/doacoes
 
 ### 
 
-POST http://localhost:8080/doacoes
-Content-type: application/json
+curl -X POST http://localhost:8080/doacoes \
+     -H "Content-Type: application/json" \
+     -d '{
+           "nome": "Calça",
+           "gênero": "feminino",
+           "quantidade": "1"
+         }'
 
-{
-    "nome": "Calça", 
-    "gênero": "feminino",
-    "quantidade": "1"
-}
-
-### 
-
-PUT http://localhost:8080/doacoes?id=048801ea-c16a-49d4-81e6-c7945639d1c3
-Content-type: application/json
-
-{
-    "nome": "Calça preta", 
-    "gênero": "feminino",
-    "quantidade": "1"
-}
 
 ### 
 
-DELETE http://localhost:8080/doacoes?id=048801ea-c16a-49d4-81e6-c7945639d1c3
-Content-type: application/json
+curl -X PUT "http://localhost:8080/doacoes?id=496db023-39c5-4e71-89b4-5299e7c460dc" \
+     -H "Content-Type: application/json" \
+     -d '{
+           "nome": "Calça preta",
+           "gênero": "feminino",
+           "quantidade": "1"
+         }'
 
-{
-    "peça": "Calça preta"
-}
+### 
+
+curl -X DELETE "http://localhost:8080/doacoes?id=fe42987b-c44-4edc-9155-f433591532e2"
