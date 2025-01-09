@@ -9,8 +9,8 @@
 API REST para gerenciamento de doações de roupas para ONG's/instituições. O projeto utiliza **Node.js** com **Express** para a API e **JWT** para autenticação. O banco de dados é em memória.
 ---
 
-- [Histórias de usuário](https://drive.google.com/file/d/1rHVscVvxEsKXZXbKbabnVxpkkQjsOZ_q/view)
-- [Diagramas UML](https://drive.google.com/file/d/1FxuZc4dPCSOArS82hCk_7FVHyvP1vS1b/view)
+- [Histórias de usuário](https://drive.google.com/file/d/1hvcBZ9otv8CZcAHx31syiYaKqbGRsohh/view?usp=sharing)
+- [Diagramas UML](https://drive.google.com/file/d/12nYoiyIP6Vxp97JP2ibRe-ra-tdk5TBL/view?usp=sharing)
 
 ---
 
